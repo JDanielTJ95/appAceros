@@ -19,10 +19,10 @@ export class AppMenuComponent implements OnInit {
                 items:
                 [
                     { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-                    { label: 'Clientes', icon: 'pi pi-fw pi-wallet', routerLink: ['/uikit/table'] },
-                    { label: 'Productos', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
+                    { label: 'Clientes', icon: 'pi pi-fw pi-users', routerLink: ['/uikit/table'] },
                     { label: 'Resumen', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
-                    { label: 'Editar', icon: 'pi pi-fw pi-pencil', routerLink: ['/pages/crud'] },
+                    { label: 'Productos', icon: 'pi pi-fw pi-book', routerLink: ['/pages/crud'] },
+                    { label: 'Presupuesto', icon: 'pi pi-fw pi-dollar', routerLink: ['/pages/empty'] },
                 ]
             },
             // Desde aqui
