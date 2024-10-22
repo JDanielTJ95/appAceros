@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validator, Validators } from '@angular/forms';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -15,9 +17,23 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class LoginComponent {
 
+    public formSubmitted = false;
+
+    public registerForm = this.fb.group({
+        email: ['test100@mail.com', [Validators.required, Validators.email ] ],
+        password: ['123436', Validators.required ],
+    });
+
+    login() {
+        this.router.navigateByUrl('/');
+    }
+
     valCheck: string[] = ['remember'];
 
     password!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(
+        public layoutService: LayoutService,
+        private router: Router,
+        private fb: FormBuilder) { }
 }
