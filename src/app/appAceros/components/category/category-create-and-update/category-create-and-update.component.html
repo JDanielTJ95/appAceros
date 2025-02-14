@@ -1,0 +1,38 @@
+<app-breadcrumbs></app-breadcrumbs>
+<div [@sliceInOut] *ngIf="showComponent">
+    <p-toast></p-toast>
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h5>
+                    {{ category.id ? 'Editar Categoria' : 'Nueva Categoria' }}
+                </h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12">
+                        <label for="name">Nombre</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="category.name" required autofocus
+                            [ngClass]="{'ng-invalid ng-dirty' :!category.name}">
+                        <small class="ng-dirty ng-invalid" *ngIf="!category.name">
+                            El nombre es requerido.
+                        </small>
+                    </div>
+                    <div class="field col-12">
+                        <label for="description">Descripcion</label>
+                        <textarea id="description" pInputTextarea [(ngModel)]="category.description" required rows="3"
+                            cols="20">
+                    </textarea>
+                    </div>
+                    <div class="field col-6">
+                        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-secondary"
+                            [routerLink]="['/categories']" routerLinkActive="router-link-active">
+                        </button>
+                    </div>
+                    <div class="field col-6">
+                        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-success"
+                            [disabled]="!category.name" (click)="onSubmitSave()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

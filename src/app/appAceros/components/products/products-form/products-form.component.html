@@ -1,0 +1,68 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>
+                {{ product.id ? 'Editar Product' : 'Nuevo Producto' }}
+            </h5>
+            <div class="p-fluid">
+                <div class="field">
+                    <label htmlFor="name">Nombre</label>
+                    <input pInputText id="name" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="price">Precio</label>
+                    <input pInputText id="price" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="category">Categoria</label>
+                    <input pInputText id="category" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="stock">Stock</label>
+                    <input pInputText id="stock" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="status">status</label>
+                    <input pInputText id="status" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="description">Descripcion</label>
+                    <input pInputText id="description" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="available">Disponible</label>
+                    <input pInputText id="available" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="size">Talla</label>
+                    <input pInputText id="size" type="text" />
+                </div>
+                <!--<div class="field col-12">
+                    <label for="name">Nombre</label>
+                    <input type="text" pInputText id="name" [(ngModel)]="category.name" required autofocus
+                        [ngClass]="{'ng-invalid ng-dirty' :!category.name}">
+                    <small class="ng-dirty ng-invalid" *ngIf="!category.name">
+                        El nombre es requerido.
+                    </small>
+                </div>
+                <div class="field col-12">
+                    <label for="description">Descripcion</label>
+                    <textarea id="description" pInputTextarea [(ngModel)]="category.description" required rows="3"
+                        cols="20">
+                    </textarea>
+                </div>-->
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-6">
+                        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-secondary"
+                            [routerLink]="['/productos']" routerLinkActive="router-link-active">
+                        </button>
+                    </div>
+                    <div class="field col-6">
+                        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-success"
+                            [disabled]="!product.name" (click)="onSubmitSave()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

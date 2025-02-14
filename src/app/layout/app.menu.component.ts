@@ -25,11 +25,20 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Presupuesto', icon: 'pi pi-fw pi-dollar', routerLink: ['/pages/empty'] },
                 ]
             },
-            // Desde aqui
             {
                 label: 'Home',
                 items: [
-                    { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
+                    {
+                        label: 'Categorias',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['/categories']
+                    },
+                    {
+                        label: 'productos',
+                        icon: 'pi pi-fw pi-book',
+                        routerLink: ['/productos'],
+                    },
                 ]
             },
             {

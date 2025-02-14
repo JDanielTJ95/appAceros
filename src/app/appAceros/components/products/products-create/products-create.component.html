@@ -1,0 +1,8 @@
+
+<app-breadcrumbs/>
+<div [@sliceInOut] *ngIf="showComponent">
+    <p-toast/>
+    <app-products-form
+        [product]="product"
+    />
+</div>
