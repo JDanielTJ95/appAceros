@@ -63,3 +63,20 @@
   background: #ECCFFF;
   color: #694382;
 }
+
+.product-badge.status-XL {
+  background: #C8E6C9;
+  color: #256029;
+}
+.product-badge.status-L {
+  background: #B3E5FC;
+  color: #23547B;
+}
+.product-badge.status-M {
+  background: #ECCFFF;
+  color: #694382;
+}
+.product-badge.status-S {
+  background: #FFD8B2;
+  color: #805B36;
+}
