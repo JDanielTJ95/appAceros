@@ -9,15 +9,18 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
             {
                 path: '', component: AppLayoutComponent,
                 children: [
-                    { path: '', loadChildren: () => import('./appAceros/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'uikit', loadChildren: () => import('./appAceros/components/uikit/uikit.module').then(m => m.UIkitModule) },
-                    { path: 'blocks', loadChildren: () => import('./appAceros/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
-                    { path: 'pages', loadChildren: () => import('./appAceros/components/pages/pages.module').then(m => m.PagesModule) },
-                    { path: 'categories', loadChildren: () => import('./appAceros/components/category/category.module').then(m => m.CategoryModule) },
-                    { path: 'productos', loadChildren: () => import('./appAceros/components/products/products.module').then(m => m.ProductsModule) },
+                    { path: '', loadChildren: () => import('./appAceros/components/dashboard/dashboard.routes') },
+                    { path: 'uikit', loadChildren: () => import('./appAceros/components/uikit/uikit.routes')},
+                    { path: 'blocks', loadChildren: () => import('./appAceros/components/primeblocks/primeblocks.routes') },
+                    { path: 'pages', loadChildren: () => import('./appAceros/components/pages/pages.routes') },
+                    { path: 'categories', loadChildren: () => import('./appAceros/components/category/category.routes')},
+                    { path: 'productos', loadChildren: () => import('./appAceros/components/products/product.routes') },
+                    { path: 'inputs', loadChildren: () => import('./appAceros/components/inputs/input.routes') },
+                    { path: 'outputs', loadChildren: () => import('./appAceros/components/outputs/outputs.routes') },
+                    { path: 'budget', loadChildren: () => import('./appAceros/components/budget/budget.routes') },
                 ]
             },
-            { path: 'auth', loadChildren: () => import('./appAceros/components/auth/auth.module').then(m => m.AuthModule) },
+            { path: 'auth', loadChildren: () => import('./appAceros/components/auth/auth.routes') },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
