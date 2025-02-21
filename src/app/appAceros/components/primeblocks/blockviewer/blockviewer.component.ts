@@ -1,4 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ChipModule } from 'primeng/chip';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { RippleModule } from 'primeng/ripple';
+import { TooltipModule } from 'primeng/tooltip';
 
 enum BlockView {
     PREVIEW,
@@ -8,6 +17,7 @@ enum BlockView {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'block-viewer',
+    standalone: true,
     template: `
     <div class="block-section">
         <div class="block-header">
@@ -21,7 +31,7 @@ enum BlockView {
                 <a [attr.tabindex]="'0'" [ngClass]="{'block-action-active': blockView === BlockView.CODE}" (click)="activateView($event, BlockView.CODE)">
                     <span>Code</span>
                 </a>
-                <a [attr.tabindex]="'0'" class="block-action-copy" (click)="copyCode($event)" 
+                <a [attr.tabindex]="'0'" class="block-action-copy" (click)="copyCode($event)"
                     pTooltip="Copied to clipboard" tooltipEvent="focus" tooltipPosition="bottom"><i class="pi pi-copy m-0"></i></a>
             </div>
         </div>
@@ -35,7 +45,18 @@ enum BlockView {
         </div>
     </div>
   `,
-    styleUrls: ['./blockviewer.component.scss']
+    styleUrls: ['./blockviewer.component.scss'],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        RippleModule,
+        ChipModule,
+        CheckboxModule,
+        FormsModule,
+        InputTextModule,
+        PasswordModule,
+        TooltipModule,
+    ],
 })
 export class BlockViewerComponent {
 

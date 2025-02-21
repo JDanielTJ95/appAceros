@@ -15,29 +15,33 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Oficial',
-                items:
-                [
-                    { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-                    { label: 'Clientes', icon: 'pi pi-fw pi-users', routerLink: ['/uikit/table'] },
-                    { label: 'Resumen', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
-                    { label: 'Productos', icon: 'pi pi-fw pi-book', routerLink: ['/pages/crud'] },
-                    { label: 'Presupuesto', icon: 'pi pi-fw pi-dollar', routerLink: ['/pages/empty'] },
-                ]
-            },
-            {
                 label: 'Home',
                 items: [
                     { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
                     {
-                        label: 'Categorias',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['/categories']
+                        label: 'budget',
+                        icon: 'pi pi-fw pi-dollar',
+                        routerLink: ['/budget'],
                     },
                     {
                         label: 'productos',
                         icon: 'pi pi-fw pi-book',
                         routerLink: ['/productos'],
+                    },
+                    {
+                        label: 'inputs',
+                        icon: 'pi pi-fw pi-arrow-right',
+                        routerLink: ['/inputs'],
+                    },
+                    {
+                        label: 'outputs',
+                        icon: 'pi pi-fw pi-arrow-left',
+                        routerLink: ['/outputs'],
+                    },
+                    {
+                        label: 'Categorias',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['/categories']
                     },
                 ]
             },

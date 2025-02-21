@@ -1,11 +1,9 @@
 
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryCreateAndUpdateComponent } from './category-create-and-update/category-create-and-update.component';
+import { Routes } from '@angular/router';
 
-@NgModule({
-    imports: [RouterModule.forChild([
+export const categoryRoutes: Routes = [
         {
             path: '',
             component: CategoryListComponent,
@@ -15,8 +13,6 @@ import { CategoryCreateAndUpdateComponent } from './category-create-and-update/c
             path: 'create-or-edit/:id',
             component: CategoryCreateAndUpdateComponent,
             data: { title: 'Crear o eliminar categoria' },
-        }
-    ])],
-    exports: [RouterModule]
-})
-export class CategoryRoutingModule { }
+        },
+];
+export default categoryRoutes;
