@@ -15,6 +15,7 @@ import { BreadcrumbsComponent } from 'src/app/shared/breadcrumbs/breadcrumbs.com
 import { ProductsFormComponent } from "../products-form/products-form.component";
 import { catchError, map, of, switchMap } from 'rxjs';
 import { ProductService } from 'src/app/appAceros/service/product.service';
+import { IProduct } from 'src/app/appAceros/Interfaces/product';
 
 @Component({
   selector: 'app-products-edit',
@@ -56,7 +57,6 @@ export class ProductsEditComponent implements OnInit {
                     return of([]);
                 return this.productService.getProductById(param.get('id'));
             }),
-            map((response): Product => response['product']),
             catchError(error => {
                 this.messageService.add({
                     severity: this.constService.ERROR,
@@ -69,11 +69,30 @@ export class ProductsEditComponent implements OnInit {
                 );
                 return of([]);
             })
-        ).subscribe(response => this.product = {...response as Product});
+        ).subscribe(response => this.product = response);
     }
 
-    public onSubmitSave(): void {}
-
-    public editCategory(): void {}
+    public onSubmitEdit(product: IProduct): void {
+        this.productService
+            .updateProduct(product)
+            .subscribe({
+                next: () => this.messageService.add({
+                    severity: this.constService.SUCCESS,
+                    summary: this.constService.SUCCESSFUL,
+                    detail: 'Producto Actualizado',
+                    life: this.constService.TIME_MESSAGE
+                }),
+                error: error => this.messageService.add({
+                    severity: this.constService.ERROR,
+                    summary: this.constService.ERROR2,
+                    detail: error,
+                    life: this.constService.TIME_MESSAGE
+                }),
+            })
+        setTimeout(
+            () => this.router.navigate(['/productos']),
+            this.constService.TIME_MESSAGE
+        );
+    }
 
 }

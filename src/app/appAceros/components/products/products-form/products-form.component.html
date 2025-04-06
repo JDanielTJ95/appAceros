@@ -29,29 +29,20 @@
                         <p-dropdown
                             formControlName="category"
                             inputId="category"
+                            optionLabel="name"
                             [options]="categories"
                             placeholder="Selecciona la categoria">
+                            <ng-template pTemplate="selectedItem">
+                                <span *ngIf="formProduct.controls['category'].value">
+                                    {{formProduct.controls['category'].value.name}}
+                                </span>
+                            </ng-template>
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.name}}</span>
+                            </ng-template>
                         </p-dropdown>
                         <small class="ng-dirty ng-invalid" *ngIf="isValidField('category')">
                             {{ getError('category') }}
-                        </small>
-                    </div>
-                    <div class="field">
-                        <label htmlFor="stock">Stock</label>
-                        <input pInputText id="stock" type="text"
-                            formControlName="stock" placeholder="Ingrgesa el stock"
-                        />
-                        <small class="ng-dirty ng-invalid" *ngIf="isValidField('stock')">
-                            {{ getError('stock') }}
-                        </small>
-                    </div>
-                    <div class="field">
-                        <label htmlFor="status">status</label>
-                        <input pInputText id="status" type="text"
-                            formControlName="status" placeholder="Ingresa el estado"
-                        />
-                        <small class="ng-dirty ng-invalid" *ngIf="isValidField('status')">
-                            {{ getError('status') }}
                         </small>
                     </div>
                     <div class="field">
@@ -61,15 +52,6 @@
                         />
                         <small class="ng-dirty ng-invalid" *ngIf="isValidField('description')">
                             {{ getError('description') }}
-                        </small>
-                    </div>
-                    <div class="field">
-                        <label htmlFor="available">Disponible</label>
-                        <input pInputText id="available" type="text"
-                            formControlName="available" placeholder="Ingresa si esta disponible"
-                        />
-                        <small class="ng-dirty ng-invalid" *ngIf="isValidField('available')">
-                            {{ getError('available') }}
                         </small>
                     </div>
                     <div class="field">
@@ -88,6 +70,15 @@
                             {{ getError('size') }}
                         </small>
                     </div>
+                    <div class="field">
+                        <label htmlFor="stock">Cantidad</label>
+                        <input pInputText id="stock" type="text"
+                            formControlName="stock" placeholder="Ingrgesa la cantidad"
+                        />
+                        <small class="ng-dirty ng-invalid" *ngIf="isValidField('stock')">
+                            {{ getError('stock') }}
+                        </small>
+                    </div>
                     <div class="p-fluid p-formgrid grid">
                         <div class="field col-6">
                             <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-secondary"
@@ -96,7 +87,7 @@
                         </div>
                         <div class="field col-6">
                             <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-success"
-                                [disabled]="!formProduct.controls['name'].value" type="submit"></button>
+                                [disabled]="formProduct.invalid" type="submit"></button>
                         </div>
                     </div>
                 </div>

@@ -14,12 +14,11 @@ import { BreadcrumbsComponent } from 'src/app/shared/breadcrumbs/breadcrumbs.com
 import { DeleteGenericDialogComponent } from 'src/app/shared/delete-generic-dialog/delete-generic-dialog.component';
 import { DeleteGenericMultipleDialogComponent } from 'src/app/shared/delete-generic-multiple-dialog/delete-generic-multiple-dialog.component';
 
-import { fadeInOut } from 'src/app/shared/animations/general-animations';
+    import { fadeInOut } from 'src/app/shared/animations/general-animations';
 import { MessageService } from 'primeng/api';
 import { Product } from 'src/app/appAceros/models/product.model';
 import { ConstantsService } from 'src/app/appAceros/service/constants.service';
 import { ProductService } from 'src/app/appAceros/service/product.service';
-import { map } from 'rxjs';
 import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
@@ -64,12 +63,11 @@ export class ProductsListComponent implements OnInit {
 
     ngOnInit(): void {
         this.setColumns();
-        this.productService.getAll().pipe(
-            map(({products}) => products),
-        ).subscribe({
-            next: response => this.products = response,
-            error: err => console.error(err),
-        });
+        this.productService.getAll()
+            .subscribe({
+                next: response => this.products = response,
+                error: err => console.error(err),
+            });
     }
 
     public setColumns(): void {
@@ -78,20 +76,74 @@ export class ProductsListComponent implements OnInit {
             { field: 'price', header: 'Precio' },
             { field: 'category', header: 'Categoria' },
             { field: 'stock', header: 'Stock' },
-            { field: 'status', header: 'Estado' },
+            { field: 'totalPrice', header: 'Precio Total' },
             { field: 'description', header: 'Descripcion' },
             { field: 'available', header: 'Disponible' },
             { field: 'size', header: 'Talla' },
         ]
     }
 
-    public deleteProduct(): void {}
+    public deleteProduct(product: Product): void {
+        this.deleteProductDialog = true;
+        this.product = { ...product };
+    }
 
-    public deleteSelectedProducts(): void {}
+    public deleteSelectedProducts(): void {
+        this.deleteProductsDialog = true;
+    }
 
-    public confirmDelte(): void {}
+    public confirmDelete(event: boolean): void {
+        if (event){
+            this.products = this.products.filter(
+                product => product.id !== this.product.id
+            );
+            this.productService.deleteProduct(
+                this.product
+            ).subscribe({
+                next: () => this.messageService.add({
+                    severity: this.constService.SUCCESS,
+                    summary: this.constService.SUCCESSFUL,
+                    detail: 'Categoria Eliminada',
+                    life: this.constService.TIME_MESSAGE
+                }),
+                error: error => this.messageService.add({
+                    severity: this.constService.ERROR,
+                    summary: this.constService.ERROR2,
+                    detail: error,
+                    life: this.constService.TIME_MESSAGE
+                }),
+            })
+        }
+        this.deleteProductDialog = false;
+    }
 
-    public confirmDeleteSelected(): void {}
+    public confirmDeleteSelected(event: boolean): void {
+        if(event){
+            this.products = this.products.filter(
+                product => this.selectedProducts.includes(product)
+            );
+            this.selectedProducts.forEach(
+                product => this.productService
+                .deleteProduct(product)
+                    .subscribe({
+                       next: () => this.messageService.add({
+                           severity: this.constService.SUCCESS,
+                           summary: this.constService.SUCCESSFUL,
+                           detail: product.name + ' eliminado',
+                           life: this.constService.TIME_MESSAGE
+                        }),
+                        error: error => this.messageService.add({
+                            severity: this.constService.ERROR,
+                            summary: this.constService.ERROR2,
+                            detail: error,
+                            life: this.constService.TIME_MESSAGE
+                        }),
+                    })
+            );
+        }
+        this.selectedProducts = [];
+        this.deleteProductsDialog = false;
+    }
 
     public onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');

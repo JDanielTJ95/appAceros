@@ -7,7 +7,7 @@ export class Product {
         public price?: number,
         public category?: Category,
         public stock?: number,
-        public status?: boolean,
+        public totalPrice?: number,
         public description?: string,
         public available?: boolean,
         public size?: string

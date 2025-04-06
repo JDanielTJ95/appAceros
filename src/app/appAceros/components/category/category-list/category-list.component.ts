@@ -94,7 +94,7 @@ export class CategoryListComponent implements OnInit{
                 next: () => this.messageService.add({
                     severity: this.constService.SUCCESS,
                     summary: this.constService.SUCCESSFUL,
-                    detail: 'Se elimino la categoria',
+                    detail: 'Categoria Eliminada',
                     life: this.constService.TIME_MESSAGE
                 }),
                 error: error => this.messageService.add({
@@ -111,7 +111,6 @@ export class CategoryListComponent implements OnInit{
 
     public confirmDeleteSelected(event: boolean): void {
         if (event){
-            console.log(this.selectedCategories);
             this.categories = this.categories.filter(
                 val => !this.selectedCategories.includes(val)
             );
@@ -122,7 +121,7 @@ export class CategoryListComponent implements OnInit{
                        next: () => this.messageService.add({
                            severity: this.constService.SUCCESS,
                            summary: this.constService.SUCCESSFUL,
-                           detail: 'Se eliminaron las categorias',
+                           detail: category.name + ' eliminado',
                            life: this.constService.TIME_MESSAGE
                         }),
                         error: error => this.messageService.add({

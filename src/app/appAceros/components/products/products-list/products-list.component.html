@@ -24,7 +24,7 @@
                     [columns]="columns"
                     responsiveLayout="scroll"
                     [rows]="10"
-                    [globalFilterFields]="['name','price', 'category.name', 'stock', 'status', 'description', 'available', 'size']"
+                    [globalFilterFields]="['name','price', 'category.name', 'stock', 'totalPrice', 'description', 'available', 'size']"
                     [paginator]="true"
                     [rowsPerPageOptions]="[10,20,30]"
                     [showCurrentPageReport]="true"
@@ -52,7 +52,7 @@
                             <th pSortableColumn="price">Precio<p-sortIcon field="price"></p-sortIcon></th>
                             <th pSortableColumn="category">Categoria<p-sortIcon field="category"></p-sortIcon></th>
                             <th pSortableColumn="stock">Stock<p-sortIcon field="stock"></p-sortIcon></th>
-                            <th pSortableColumn="status">Estado<p-sortIcon field="status"></p-sortIcon></th>
+                            <th pSortableColumn="totalPrice">Precio Total<p-sortIcon field="Precio Total"></p-sortIcon></th>
                             <th pSortableColumn="description">Descripcion<p-sortIcon field="description"></p-sortIcon></th>
                             <th pSortableColumn="available">Disponible<p-sortIcon field="available"></p-sortIcon></th>
                             <th pSortableColumn="size">Talla<p-sortIcon field="size"></p-sortIcon></th>
@@ -81,8 +81,8 @@
                                 {{product.stock}}
                             </td>
                             <td style="width:14%; min-width:10rem;">
-                                <span class="p-column-title">status</span>
-                                {{product.status}}
+                                <span class="p-column-title">Precio Total</span>
+                                $ {{product.totalPrice}}
                             </td>
                             <td style="width:14%; min-width:10rem;">
                                 <span class="p-column-title">description</span>
@@ -116,7 +116,7 @@
                 </p-table>
             </div>
 
-            <app-delete-generic-dialog [dialog]="deleteCategoryDialog" [object]="product.name"
+            <app-delete-generic-dialog [dialog]="deleteProductDialog" [object]="product.name"
                 (isConfirmDelete)="confirmDelete($event)">
             </app-delete-generic-dialog>
 
