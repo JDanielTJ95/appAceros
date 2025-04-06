@@ -13,6 +13,8 @@ import { ConstantsService } from 'src/app/appAceros/service/constants.service';
 import { fadeInOut } from 'src/app/shared/animations/general-animations';
 import { BreadcrumbsComponent } from 'src/app/shared/breadcrumbs/breadcrumbs.component';
 import { ProductsFormComponent } from "../products-form/products-form.component";
+import { ProductService } from 'src/app/appAceros/service/product.service';
+import { IProduct } from 'src/app/appAceros/Interfaces/product';
 
 @Component({
   selector: 'app-products-create',
@@ -43,15 +45,34 @@ export class ProductsCreateComponent implements OnInit{
         private messageService: MessageService,
         private constService: ConstantsService,
         private router: Router,
-        private route: ActivatedRoute,
+        private productService: ProductService,
     ) {}
 
     ngOnInit(): void {
 
     }
 
-    public onSubmitSave(): void {}
-
-    public saveProduct(): void {}
+    public onSubmitSave(product: IProduct): void {
+        this.productService
+            .createProduct(product)
+            .subscribe({
+                next: () => this.messageService.add({
+                    severity: this.constService.SUCCESS,
+                    summary: this.constService.SUCCESSFUL,
+                    detail: 'Producto Creado',
+                    life: this.constService.TIME_MESSAGE
+                }),
+                error: error => this.messageService.add({
+                    severity: this.constService.ERROR,
+                    summary: this.constService.ERROR2,
+                    detail: error,
+                    life: this.constService.TIME_MESSAGE
+                }),
+            })
+        setTimeout(
+            () => this.router.navigate(['/productos']),
+            this.constService.TIME_MESSAGE
+        );
+    }
 
 }

@@ -1,0 +1,54 @@
+<app-breadcrumbs/>
+<p-toast/>
+<div [@sliceInOut] *ngIf="showComponent">
+    <p-toast/>
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h5>{{title}}</h5>
+                <form [formGroup]="formOutput" (ngSubmit)="onSubmitSave()" autocomplete="off">
+                    <div class="p-fluid">
+                        <div class="field">
+                            <label for="size">Producto</label>
+                            <p-dropdown
+                                formControlName="product"
+                                inputId="product"
+                                optionLabel="name"
+                                [options]="products"
+                                placeholder="Selecciona el producto">
+                                <ng-template pTemplate="selectedItem">
+                                    <span *ngIf="currentOutput.product">
+                                        {{currentOutput.product.name}}
+                                    </span>
+                                </ng-template>
+                                <ng-template let-option pTemplate="item">
+                                    <span>{{option.name}}</span>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                        <div class="field">
+                            <label htmlFor="name">Cantidad</label>
+                            <input pInputText id="name" type="text"
+                                formControlName="amount" placeholder="Ingresa la cantidad"
+                            />
+                            <small class="ng-dirty ng-invalid" *ngIf="currentOutput.amount.invalid">
+                                Agrega una cantidad correcta
+                            </small>
+                        </div>
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-6">
+                                <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-secondary"
+                                    [routerLink]="['/outputs']" routerLinkActive="router-link-active">
+                                </button>
+                            </div>
+                            <div class="field col-6">
+                                <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-success"
+                                    [disabled]="formOutput.invalid" type="submit"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

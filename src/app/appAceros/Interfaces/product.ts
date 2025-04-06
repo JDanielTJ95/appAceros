@@ -14,3 +14,16 @@ export interface Product {
     image?: string;
     rating?: number;
 }
+
+export interface IProduct{
+    id?: string,
+    name?: string,
+    price?: number,
+    category?: string,
+    stock?: number,
+    totalPrice?: number,
+    description?: string,
+    available?: boolean,
+    size?: string
+
+}

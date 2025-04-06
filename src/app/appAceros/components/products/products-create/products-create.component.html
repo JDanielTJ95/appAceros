@@ -4,5 +4,6 @@
     <p-toast/>
     <app-products-form
         [product]="product"
+        (selectedProduct)="onSubmitSave($event)"
     />
 </div>

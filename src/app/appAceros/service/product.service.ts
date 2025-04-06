@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../Interfaces/product';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
+import { Category } from '../models/category.model';
+import { ICategory } from '../Interfaces/category';
 
 const base_url = `${ environment.base_url }/products`;
 
@@ -12,12 +14,46 @@ export class ProductService {
     constructor(private http: HttpClient) { }
 
     public getAll(): Observable<any> {
-        return this.http.get(base_url);
+        return this.http.get(base_url).pipe(
+            map(
+                (response: {ok: boolean, products: Product[]}) =>
+                    response.products
+            ),
+            map(products =>
+                products.map(product => {
+                    const { _id, ...category } = product.category as ICategory;
+                    return {
+                        ...product,
+                        category: {
+                            ...category,
+                            id: _id
+                        }
+                    };
+                })
+            ),
+        );
     }
 
     public getProductById(id: string): Observable<any> {
         const url = `${ base_url }/getProductById/${ id }`;
-        return this.http.get(url);
+        return this.http.get(url).pipe(
+            map(
+                (response: {ok: boolean, product: Product[]}) =>
+                    response.product
+            ),
+            map(products =>
+                products.map(product => {
+                    const { _id, ...category } = product.category as ICategory;
+                    return {
+                        ...product,
+                        category: {
+                            ...category,
+                            id: _id
+                        }
+                    };
+                })
+            ),
+        );
     }
 
     public createProduct(product: any): Observable<any> {
@@ -26,7 +62,9 @@ export class ProductService {
 
     public updateProduct(product: any): Observable<any> {
         const url = `${ base_url }/${ product.id }`;
-        return this.http.put(url, product);
+        return this.http.put(url, product).pipe(
+            map((response: {ok: boolean, product: Product}) => response.ok)
+        );
     }
 
     public deleteProduct(product: any): Observable<any> {
